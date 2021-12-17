@@ -42,6 +42,10 @@ To test the project locally you can just run the following commands on the termi
 curl localhost:4000/employee
 ```
 ```bash
+# to query a particular employee
+curl localhost:4000/employee/${employeeId}
+```
+```bash
 # to create a new employee on the database
 curl --header "Content-Type: application/json" \
   --request POST \
