@@ -1,0 +1,213 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"EmployeeStatus": {
+			"enum": [
+				"CHECKED_IN",
+				"CHECKED_OUT",
+				"UNKNOWN"
+			],
+			"type": "string"
+		},
+		"Employee": {
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double"
+				},
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"status": {
+					"$ref": "#/definitions/EmployeeStatus"
+				},
+				"lastStatusUpdate": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"deletedAt": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"required": [
+				"id",
+				"firstName",
+				"lastName",
+				"status",
+				"lastStatusUpdate",
+				"createdAt",
+				"updatedAt",
+				"deletedAt"
+			],
+			"type": "object",
+			"additionalProperties": true
+		},
+		"employeeRepo.CreateEmployeePayload": {
+			"properties": {
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"firstName",
+				"lastName"
+			],
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"info": {
+		"title": "conso4s-challenge",
+		"version": "1.0.0",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/employee": {
+			"get": {
+				"operationId": "GetEmployees",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"items": {
+								"$ref": "#/definitions/Employee"
+							},
+							"type": "array"
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateEmployee",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Employee"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "payload",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/employeeRepo.CreateEmployeePayload"
+						}
+					}
+				]
+			}
+		},
+		"/employee/{id}": {
+			"get": {
+				"operationId": "GetEmployee",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/employee/{id}/qr-code": {
+			"get": {
+				"operationId": "GetEmployeeQRCode",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/employee/{id}/check-in": {
+			"get": {
+				"operationId": "CheckinEmploy",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {}
+}
