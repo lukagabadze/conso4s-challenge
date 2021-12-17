@@ -44,7 +44,6 @@ export async function getEmployeeQRCode(
   if (!employee) return "Employee does not exist";
 
   const fullUrl = req.protocol + "://" + req.get("host") + req.originalUrl; // assemble full url
-  //const fullUrl = req.protocol + "://" + "192.168.0.108:4000" + req.originalUrl; // assemble full url
   const baseUrl = fullUrl.split("/").slice(0, -1).join("/"); // base url (without the last part '/qr-code')
   const checkInUrl = baseUrl + "/check-in"; // append the appropriate route
 

@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:12
+    environment: 
+      - POSTGRES_DB=conso4s_challenge
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "4000:4000"
+    depends_on: 
+      - db
+    environment: 
+      - POSTGRES_DB=conso4s_challenge
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+

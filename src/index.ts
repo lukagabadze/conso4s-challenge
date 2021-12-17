@@ -10,12 +10,16 @@ const app: Application = express();
 
 // connect to db and listen on port
 const port = process.env.PORT || 4000;
-createConnection(dbConfig).then(() => {
-  console.log("connected to db");
-  app.listen(port, () => {
-    console.log(`listening on port ${port}`);
+createConnection(dbConfig)
+  .then(() => {
+    console.log("connected to db");
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
   });
-});
 
 // middleware
 app.use(express.json());

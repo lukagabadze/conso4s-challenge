@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node build/index.js",
     "predev": "yarn tsoa spec",
     "prebuild": "yarn tsoa spec",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
