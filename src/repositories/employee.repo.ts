@@ -47,13 +47,13 @@ export async function getEmployeeQRCode(
   const baseUrl = fullUrl.split("/").slice(0, -1).join("/"); // base url (without the last part '/qr-code')
   const checkInUrl = baseUrl + "/check-in"; // append the appropriate route
 
-  console.log(fullUrl);
-  console.log(baseUrl);
-  console.log(checkInUrl);
-
   const employeeQRCode = await QRCode.toDataURL(checkInUrl); // generate the qr code
 
-  return `<img src='${employeeQRCode}' style='max-width: 400px;width:100%;' />`;
+  // this is just for demonstration
+  return `<div style='display:flex; flex-direction:column; align-items:center; font-family: sans-serif;'>
+            <h1 style='margin: 0'>${employee.firstName} ${employee.lastName}</h1>
+            <img src='${employeeQRCode}' style='max-width: 400px;width:100%;margin: 0 0.8em;' />
+          </div>`;
 }
 
 export async function checkinEmploy(
